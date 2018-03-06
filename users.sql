@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  mar. 06 mars 2018 à 12:29
+-- Généré le :  mar. 06 mars 2018 à 14:29
 -- Version du serveur :  5.6.38
 -- Version de PHP :  7.1.12
 
@@ -32,7 +32,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
-(4, 'marine', '$2y$10$MV/DL.RuOUcshDvSHj0MAuYzavFgE60508.g7H7NXPkagAtfNrPDS', '2018-03-06 12:18:30');
+(4, 'marine', '$2y$10$MV/DL.RuOUcshDvSHj0MAuYzavFgE60508.g7H7NXPkagAtfNrPDS', '2018-03-06 12:18:30'),
+(5, 'marine2', '$2y$10$PR2rxGgPh5/Fw5hOxEh...pRIGUvOSIgTuC2.sc0DrFBHyB6hC34u', '2018-03-06 13:37:35');
 
 --
 -- Index pour les tables déchargées
@@ -53,4 +54,5 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
