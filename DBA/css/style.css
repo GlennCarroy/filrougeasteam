@@ -1054,3 +1054,18 @@ body.mobile-nav-active #mobile-nav-toggle {
 #footer .footer-links a:hover {
   color: #1dc8cd;
 }
+
+
+/*ADMIN BLOG*/
+
+/*.modif-blog{
+  float: right;
+  list-style-type: none !important;
+  font-size: 5px !important;
+}*/
+
+h2.title-blog{
+  font-weight: bold !important;
+  display: block;
+  border-top: 2px solid #000 !important;
+}
