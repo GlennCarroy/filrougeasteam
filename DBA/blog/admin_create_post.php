@@ -11,9 +11,9 @@ if (isset($_POST['submit'])) {
 		//Requête préparée pour envoyer dans la base de donées.
 		$add_post = $pdo->prepare('INSERT INTO articles( titre , contenu , auteurs , categories , date_ajout ) VALUES (? , ? , ? , ? , ? ) ');
 		/* On sanitize les entrées */
-		$titre = filter_var($_POST['titre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$contenu = filter_var($_POST['contenu'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$auteur = $titre = filter_var($_POST['auteur'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$titre = htmlspecialchars($_POST['titre']);
+		$contenu = htmlspecialchars($_POST['contenu']);
+		$auteur = $titre = htmlspecialchars($_POST['auteur']);
 		$categories = $_POST['categories'];
 		$date = date("Y-m-d H:i:s");
 
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
 		echo '<body onLoad="alert(\'Votre nouvel article est en ligne.\')">';
 	}
 	else {
-			echo '<body onLoad="alert(\'Remplissez tous les champs\')">';
+		echo '<body onLoad="alert(\'Remplissez tous les champs\')">';
 		}
 }
 ?>
