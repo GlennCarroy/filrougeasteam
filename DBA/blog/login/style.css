@@ -27,7 +27,7 @@ a:hover, a:active, a:focus {
 
 p {
   padding: 0;
-  margin: 0 0 30px 0;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -764,7 +764,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #more-features p {
   font-size: 14px;
-  margin-left: 100px;
+  /*margin-left: 100px;*/
   margin-bottom: 0;
   line-height: 24px;
 }
@@ -1056,7 +1056,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 
-/*DASHBOARD*/
+/*-----------------------------------------------------
+# DASHBOARD
+--------------------------------------------------------*/
 
 #header-dashboard {
   padding: 30px 0;
@@ -1107,3 +1109,29 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 }
 
+h3.section-title{
+  margin-top: 50px;
+}
+
+
+.modif-blog{
+  list-style: none;
+  display: inline;
+}
+
+.title-blog{
+  font-weight: bold;
+}
+
+.icon-blog i:before{
+  font-size: 2rem;
+  background: #1dc8cd;
+  background: linear-gradient(45deg, #1dc8cd 0%, #55fabe 100%);
+    background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-title{
+  font-weight: bold;
+}

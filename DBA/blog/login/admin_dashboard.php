@@ -10,6 +10,8 @@
 
 $reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
 
+$reponse_article2 = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
+
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +42,10 @@ $reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, 
 		<link href="../../lib/ionicons/css/ionicons.min.css" rel="stylesheet">
 		<link href="../../lib/magnific-popup/magnific-popup.css" rel="stylesheet">
 
-		<link rel="stylesheet" href="../../css/style.css">
+		<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<header id="header">
+	<header id="header-dashboard">
 	    <div class="container">
 
 	      <div id="logo" class="pull-left">
@@ -54,9 +56,9 @@ $reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, 
 
 	      <nav id="nav-menu-container">
 	        <ul class="nav-menu">
-	          <li class="menu-active"><a href="#intro">Accueil</a></li>
-	          <li><a href="#about">A propos</a></li>
-	          <li><a href="#gallery">Gallerie</a></li>
+	          <li class="menu-active"><a href="#intro">Blog</a></li>
+	          <li><a href="#about">Ajouter article</a></li>
+	          <li><a href="#gallery">Catégories</a></li>
 	          <li><a href="#blog">Blog</a></li>
 	          <li><a href="#contact">Contact</a></li>
 	        </ul>
@@ -66,29 +68,52 @@ $reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, 
 
 	<main id="main">
 		<section id="more-features" class="section-bg">
-	    	<div class="container">
+	    	<div class="container p-0">
 		        <div class="section-header">
 		          <h3 class="section-title">Blog : Dashboard</h3>
 		          <span class="section-divider"></span>
 		        </div>
-	        	<div class="row">
-		
+
+		       	<div class="row">
+				
 <?php
 while($donnees_article = $reponse_article->fetch()){
 ?>
+
+		        <div class="card col-lg-3 m-1">
+					  <div class="card-body">
+					    <h5 class="card-title"><?php echo $donnees_article['titre'] ?></h5>
+					    <h6 class="card-subtitle mb-2 text-muted"><?php echo $donnees_article['auteurs']?> le <?php echo $donnees_article['date_ajout_fr']?></h6>
+					    <ul class="modif-blog">
+		            		<li><a href=""><div class="icon-blog"><i class="ion-edit">Éditer</i></div></a></li>
+				            <li><a href=""><div class="icon-blog"><i class="ion-close">Supprimer</i></div></a></li>
+				        </ul>
+					  </div>
+					</div>
+<?php
+}
+?>
+				</div>
+				<br><br>
+	        	<div class="row">
+	        		<h2>Articles</h2>
+		
+<?php
+while($donnees_article2 = $reponse_article2->fetch()){
+?>
 		          <div class="col-lg-12">
 		            <div class="box wow fadeInLeft">
-		            	<h5><?php echo $donnees_article['auteurs']?> le <?php echo $donnees_article['date_ajout_fr']?></h5>
+		            	<h5><?php echo $donnees_article2['auteurs']?> le <?php echo $donnees_article2['date_ajout_fr']?></h5>
 		            	
-		            	<!-- <ul class="modif-blog">
-		            		<li><div class="icon"><i class="ion-edit"></i></div></li>
-				            <li><div class="icon"><i class="ion-close"></i></div></li>
-				        </ul> -->
-				      <p><?php echo $donnees_article['categories']?></p>
-		              <h2 class="title-blog"><?php echo $donnees_article['titre'] ?></h2>
+		            	<ul class="modif-blog">
+		            		<li><a href=""><div class="icon-blog"><i class="ion-edit"></i></div></a></li>
+				            <li><a href=""><div class="icon-blog"><i class="ion-close"></i></div></a></li>
+				        </ul>
+				      <p><?php echo $donnees_article2['categories']?></p>
+		              <h2 class="title-blog"><?php echo $donnees_article2['titre'] ?></h2>
 		              
 		              <p>
-		              <?php echo $donnees_article['contenu']?></p>
+		              <?php echo $donnees_article2['contenu']?></p>
 		              
 		            </div>
 		          
