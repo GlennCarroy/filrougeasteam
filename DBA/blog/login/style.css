@@ -27,7 +27,7 @@ a:hover, a:active, a:focus {
 
 p {
   padding: 0;
-  margin: 0 0 30px 0;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -764,7 +764,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #more-features p {
   font-size: 14px;
-  margin-left: 100px;
+  /*margin-left: 100px;*/
   margin-bottom: 0;
   line-height: 24px;
 }
@@ -1055,46 +1055,83 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #1dc8cd;
 }
 
-<<<<<<< HEAD
-/* BLOG PAGE CORRECTION */
 
-.blog_html {
-  background-color: #eff5f5;
-}
+/*-----------------------------------------------------
+# DASHBOARD
+--------------------------------------------------------*/
 
-.blog_main {
-  padding-top: 150px;
-  background-color: #eff5f5;
-}
-
-.blog_header {
-  background-color: #46caca;
-}
-
-.blog_main nav ul {
-  display: flex;
-  list-style-type: none;
+#header-dashboard {
+  padding: 30px 0;
+  height: 92px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  transition: all 0.5s;
+  z-index: 997;
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
   padding: 0;
+  height: 72px;
 }
 
-.blog_main nav ul li {
-  padding: 0 10px;
+#header-dashboard #logo {
+  float: left;
 }
 
-.articleWrapper {
-  padding-bottom: 40px;
+#header-dashboard #logo h1 {
+  font-size: 36px;
+  margin: -4px 0 0 0;
+  padding: 0;
+  line-height: 1;
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.articleWrapper h3 {
-  padding-top: 5px;
+#header-dashboard #logo h1 a, #header-dashboard #logo h1 a:hover {
+  color: #fff;
 }
 
-.articleWrapper ul {
+#header-dashboard #logo img {
+  padding: 0;
   margin: 0;
 }
 
-.articleWrapper .categories_tags {
-  background-color: #666a6e; 
-  color: #eff5f5;
-  font-size: 0.8rem;
-  padding: 5px;
+@media (max-width: 768px) {
+  #header-dashboard #logo h1 {
+    font-size: 28px;
+    margin-top: 0;
+  }
+  #header-dashboard #logo img {
+    max-height: 40px;
+  }
+}
+
+h3.section-title{
+  margin-top: 50px;
+}
+
+
+.modif-blog{
+  list-style: none;
+  display: inline;
+}
+
+.title-blog{
+  font-weight: bold;
+}
+
+.icon-blog i:before{
+  font-size: 2rem;
+  background: #1dc8cd;
+  background: linear-gradient(45deg, #1dc8cd 0%, #55fabe 100%);
+    background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-title{
+  font-weight: bold;
+}
