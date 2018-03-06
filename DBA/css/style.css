@@ -1054,3 +1054,48 @@ body.mobile-nav-active #mobile-nav-toggle {
 #footer .footer-links a:hover {
   color: #1dc8cd;
 }
+
+/* BLOG PAGE CORRECTION */
+
+.blog_html {
+  background-color: #eff5f5;
+}
+
+.blog_main {
+  padding-top: 150px;
+  background-color: #eff5f5;
+}
+
+.blog_header {
+  background-color: #46caca;
+}
+
+.blog_main nav ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.blog_main nav ul li {
+  padding: 0 10px;
+}
+
+.articleWrapper {
+  padding-bottom: 40px;
+}
+
+.articleWrapper h3 {
+  padding-top: 5px;
+}
+
+.articleWrapper ul {
+  margin: 0;
+}
+
+.articleWrapper .categories_tags {
+  background-color: #666a6e; 
+  color: #eff5f5;
+  font-size: 0.8rem;
+  padding: 5px;
+}
+
