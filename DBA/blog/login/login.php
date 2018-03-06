@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             enregistrer le nom d'utilisateur à la session */
                             session_start();
                             $_SESSION['username'] = $username;      
-                            header("location: welcome.php");
+                            header("location: admin_dashboard.php");
                         } else{
                             // Affiche un message d'erreur si le mot de passe n'est pas valide
                             $password_err = 'Le mot de passe que vous avez entré n\'était pas valide.';
