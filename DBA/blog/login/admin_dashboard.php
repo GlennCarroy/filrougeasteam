@@ -11,9 +11,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 }
 
 
-$reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
-
-$reponse_article2 = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
+$reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY date_ajout DESC");
 
 ?>
 
@@ -72,8 +70,8 @@ while($donnees_article = $reponse_article->fetch()){
 					    <h5 class="card-title"><?php echo $donnees_article['titre'] ?></h5>
 					    <h6 class="card-subtitle mb-2 text-muted"><?php echo $donnees_article['auteurs']?> le <?php echo $donnees_article['date_ajout_fr']?></h6>
 					    <ul class="modif-blog">
-		            		<li><a href=""><div class="icon-blog"><i class="ion-edit">Éditer</i></div></a></li>
-				            <li><a href=""><div class="icon-blog"><i class="ion-close">Supprimer</i></div></a></li>
+		            		<li><a href="admin_update_post.php?article=<?php echo $donnees_article['Id']?>"><div class="icon-blog"><i class="ion-edit">Éditer</i></div></a></li>
+				            <li><a href="admin_delete_post.php"><div class="icon-blog"><i class="ion-close">Supprimer</i></div></a></li>
 				        </ul>
 					  </div>
 					</div>
@@ -81,34 +79,7 @@ while($donnees_article = $reponse_article->fetch()){
 }
 ?>
 				</div>
-				<br><br>
-	        	<div class="row">
-	        		<h2>Articles</h2>
-		
-<?php
-while($donnees_article2 = $reponse_article2->fetch()){
-?>
-		          <div class="col-lg-12">
-		            <div class="box wow fadeInLeft">
-		            	<h5><?php echo $donnees_article2['auteurs']?> le <?php echo $donnees_article2['date_ajout_fr']?></h5>
-		            	
-		            	<ul class="modif-blog">
-		            		<li><a href=""><div class="icon-blog"><i class="ion-edit"></i></div></a></li>
-				            <li><a href=""><div class="icon-blog"><i class="ion-close"></i></div></a></li>
-				        </ul>
-				      <p><?php echo $donnees_article2['categories']?></p>
-		              <h2 class="title-blog"><?php echo $donnees_article2['titre'] ?></h2>
-		              
-		              <p>
-		              <?php echo $donnees_article2['contenu']?></p>
-		              
-		            </div>
-		          
-		          </div>
-<?php
-}
-?>
-  				</div>
+				<br><br>	        	
   			</div>
    		</section>
 	</main>
