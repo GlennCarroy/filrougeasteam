@@ -1,10 +1,14 @@
 <?php 
-// session_start();
-// if (!isset($_SESSION['login']) AND !isset($_SESSION['pwd'])) {
-//   header('location: index.php');
-// }
+// Initialise la session
+session_start();
+ 
+// Si la variable de session n'est pas définie, elle redirigera vers la page de connexion
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: login.php");
+  exit;
+}
 
-@include 'connection_db.php';
+@include '../connection_db.php';
 
 if (isset($_POST['submit'])) {
 	if( isset($_POST['categorie_nom']) ) {

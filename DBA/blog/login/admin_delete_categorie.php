@@ -1,6 +1,6 @@
 <?php 
 
-@include 'connection_db.php';
+@include '../connection_db.php';
 
 $categorie_to_delete = $_GET['categorie'];
 

@@ -1,11 +1,14 @@
 <?php
 @include '../connection_db.php';
 
-// session_start();
-
-// if (!isset($_GET['']) AND !isset($_GET[''])) {
-// 	header("location: ... .php")
-// };
+// Initialise la session
+session_start();
+ 
+// Si la variable de session n'est pas définie, elle redirigera vers la page de connexion
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: login.php");
+  exit;
+}
 
 
 $reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
@@ -45,26 +48,10 @@ $reponse_article2 = $pdo->query("SELECT Id, titre, contenu, categories, auteurs,
 		<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<header id="header-dashboard">
-	    <div class="container">
-
-	      <div id="logo" class="pull-left">
-	        <!-- <h1><a href="#intro" class="scrollto"></a></h1> -->
-	        <!-- Uncomment below if you prefer to use an image logo -->
-	        <a href="#intro"><img src="../../img/download.png" alt="Logo DBA" title="Logo"></a>
-	      </div>
-
-	      <nav id="nav-menu-container">
-	        <ul class="nav-menu">
-	          <li class="menu-active"><a href="#intro">Blog</a></li>
-	          <li><a href="#about">Ajouter article</a></li>
-	          <li><a href="#gallery">Catégories</a></li>
-	          <li><a href="#blog">Blog</a></li>
-	          <li><a href="#contact">Contact</a></li>
-	        </ul>
-	      </nav><!-- #nav-menu-container -->
-	    </div>
- 	 </header><!-- #header -->
+	
+<?php 
+	include('admin_blog_header.php');
+?>
 
 	<main id="main">
 		<section id="more-features" class="section-bg">
