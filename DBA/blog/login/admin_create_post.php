@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
 		$titre = htmlspecialchars($_POST['titre']);
 		$contenu = htmlspecialchars($_POST['contenu']);
 		$auteur = $titre = htmlspecialchars($_POST['auteur']);
-		$categories = $_POST['categories'];
+		$categories = implode("," , $_POST['categories']);
 		$date = date("Y-m-d H:i:s");
 
 		$add_post->execute(array( $titre , $contenu , $auteur , $categories , $date));
@@ -29,31 +29,77 @@ if (isset($_POST['submit'])) {
 		echo '<body onLoad="alert(\'Remplissez tous les champs\')">';
 		}
 }
+
+$categories_liste = $pdo->query('SELECT * FROM categories_liste');
+$categories_liste = $categories_liste->fetchAll();
+
 ?>
 <!DOCTYPE html>
-<html lang="en" class="blog_html">
+<html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>DBA_blog_admin</title>
+		<meta charset="UTF-8">
+		<title>Blog - Dashboard</title>
+		
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<meta content="" name="keywords">
+		<meta content="" name="description">
+
+
+
+		<!-- Favicons -->
+		<link href="../../img/favicon.png" rel="icon">
+		<link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
+
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+		<!-- Bootstrap CSS File -->
+		<link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Libraries CSS Files -->
+		<link href="../../lib/animate/animate.min.css" rel="stylesheet">
+		<link href="../../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="../../lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+		<link href="../../lib/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+		<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 	<?php include 'admin_blog_header.php' ?>
 
-	<form method="POST" >
+	<form method="POST" class="create_main create_post" >
 		<label for="titre">Titre</label>
 			<input type="text" name="titre" maxlength="70" required>
 		<label for="contenu">Contenu</label>
 			<textarea name="contenu" cols="30" rows="10" style="resize: none;"></textarea>
 		<label for="auteur">Auteur</label>
 			<input type="text" name="auteur" maxlength="50" required>
-		<label for="categories">Catégorie</label>
-			<select name="categories">
-				<option value="Environnement">Environnement</option>
-				<option value="Solidarité">Solidarité</option>
-				<option value="Projets">Projets</option>
-			</select>
-		<input type="submit" value="Publier" name="submit">
+		<label for="categories">Catégorie(s)</label>
+			<ul id="categories_liste_wrapper">
+				<?php for ($i=0; $i < sizeof($categories_liste) ; $i++) { ?>
+
+					<li><input type="checkbox" name="categories[]" value="<?php echo $categories_liste[$i]['categorie_nom'] ?>"><?php echo $categories_liste[$i]['categorie_nom'] ?></li>
+
+				<?php } ?>
+			</ul>
+		<input type="submit" value="Publier" name="submit" class="button">
 	</form>
+
+  <!-- JavaScript Libraries -->
+  <script src="../../lib/jquery/jquery.min.js"></script>
+  <script src="../../lib/jquery/jquery-migrate.min.js"></script>
+  <script src="../../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../lib/easing/easing.min.js"></script>
+  <script src="../../lib/wow/wow.min.js"></script>
+  <script src="../../lib/superfish/hoverIntent.js"></script>
+  <script src="../../lib/superfish/superfish.min.js"></script>
+  <script src="../../lib/magnific-popup/magnific-popup.min.js"></script>
+
+  <!-- Contact Form JavaScript File -->
+  <script src="../../contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="../../js/main.js"></script>
 </body>
 </html>

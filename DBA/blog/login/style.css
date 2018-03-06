@@ -1135,3 +1135,35 @@ h3.section-title{
 .card-title{
   font-weight: bold;
 }
+
+.create_main {
+  padding-top: 120px;
+}
+
+.create_post {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.create_post .button {
+  width: 200px;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+.create_post label {
+  padding-top: 10px;
+}
+
+#categories_liste_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style-type: none;
+}
+
+#categories_liste_wrapper li {
+  width: 20%;
+}
