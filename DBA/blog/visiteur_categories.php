@@ -1,16 +1,18 @@
 <?php
 @include 'connection_db.php';
 
-$top_blog = $pdo->query("SELECT * FROM articles ORDER BY date_ajout DESC ");
+$cat_select= $_GET['categorie'];
 
-$top_blog = $top_blog->fetchAll() //rends un tableau;
+$categorie_articles = $pdo->query("SELECT * FROM articles WHERE categories = '$cat_select' ORDER BY date_ajout DESC ");
+
+$categorie_articles = $categorie_articles->fetchAll(); //rends un tabl
 
 ?>
 <!DOCTYPE html>
 <html lang="en" class="blog_html">
 <head>
   <meta charset="utf-8">
-  <title>DBA_blog</title>
+  <title>DBA_blog_catégorie</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -88,35 +90,29 @@ $top_blog = $top_blog->fetchAll() //rends un tableau;
     </div>
   </header><!-- #header -->
   <main id="main" class="blog_main">
-  	<h1>Blog de la DBA</h1>
   	<nav>
-	  	<ul>
-	  		<li><a href="visiteur_categories.php?categorie=Environnement">Environnement</a></li>
-	  		<li><a href="visiteur_categories.php?categorie=Projets">Projets</a></li>
-	  		<li><a href="visiteur_categories.php?categorie=Solidarité">Solidarité</a></li>
+  		<ul>
+	  		<li><a href="visiteur_blog.php">Retour</a></li>
 	  	</ul>
 	</nav>
-  	<h2>Derniers articles en ligne</h2>
-	
-	 <?php for ($i=0; $i < 5; $i++) {  
-	 		//conversion de la date au format européen
-		$sqldate = strtotime($top_blog[$i]["date_ajout"]); 
+	<h2>Article concernant la catégorie "<?php echo $cat_select ?>"</h2>
+	<?php for ($i=0; $i < sizeof($categorie_articles); $i++) {  
+		//conversion de la date au format européen
+		$sqldate = strtotime($categorie_articles[$i]["date_ajout"]); 
 		$eurodate = date('d-m-Y H:i:s', $sqldate);
-	 	?>
+		?>
 			<div class="articleWrapper">
-				<span class="categories_tags"><?php echo $top_blog[$i]["categories"] ?></span>
-				<h3><?php echo $top_blog[$i]["titre"]?></h3>
-					<p><?php echo $top_blog[$i]["contenu"] ?></p>
+				<h3><?php echo $categorie_articles[$i]["titre"]?></h3>
+					<p><?php echo $categorie_articles[$i]["contenu"] ?></p>
 					<ul>
-						<li><?php echo $top_blog[$i]["auteurs"] ?></li>
-						<li><?php echo $eurodate ?></li>
+						<li><?php echo $categorie_articles[$i]["auteurs"] ?></li>
+						<li><?php echo $eurodate; ?></li>
 					</ul>
 			</div>
 
-
 	<?php	};
 	?>
-</main>
+  </main>
  <!--==========================
     Footer
   ============================-->
