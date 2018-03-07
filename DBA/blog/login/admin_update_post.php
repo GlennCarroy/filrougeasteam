@@ -35,15 +35,27 @@ if(isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['categor
 	
 	//On met à jour 'articles_has_categories' avec les catégories sélectionnées en fonction de l'id de l'article
 	$nvcategories = $_POST['categories'];
+
 	foreach ($nvcategories as $key => $value) {
+
+		var_dump($nvcategories[$key]);
+
+		// $nvcategories = $nvcategories[$value];
+
+		if ($) {
+			# code...
+		}
+
+		$update2 = $pdo->query("SELECT id FROM articles_has_categories");
+
 		$update_categories = $pdo->prepare("UPDATE articles_has_categories SET 
 		id_categories = :nvcategorie
 		WHERE id_articles = :id_articles");
 
 		$update_categories->execute(array(
-		'nvcategorie' => $nvcategories['$key'],
+		'nvcategorie' => $nvcategories[$key],
 		'id_articles' => $_GET['article']
-		))
+		));
 	}
 }
 
@@ -51,9 +63,12 @@ if(isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['categor
 $categories_liste = $pdo->query("SELECT * FROM categories_liste");
 $categories_liste = $categories_liste->fetchAll();
 
+$caca = $pdo->query("SELECT * FROM articles_has_categories");
+$caca = $caca->fetchAll();
+
 //Je mets ce code après pour que les modifs s'affichent quand on édite
 //On va chercher la bdd en fonction de l'id
-$reponse_article = $pdo->prepare("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles WHERE Id = ?");
+$reponse_article = $pdo->prepare("SELECT Id, titre, contenu, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles WHERE Id = ?");
 
 //l'id se trouve dans le GET
 $reponse_article->execute(array($_GET['article']));
@@ -89,7 +104,7 @@ $reponse_article->execute(array($_GET['article']));
 </head>
 	<body>
 <?php 
-		// include('admin_blog_header.php');
+		include('admin_blog_header.php');
 ?>
 		<div class="container marg-top">
 			<div class="row">
@@ -112,14 +127,33 @@ while($donnees_article = $reponse_article->fetch()){
 					              <input type="text" name="auteur" value="<?php echo $donnees_article['auteurs']?>"> le <?php echo $donnees_article['date_ajout_fr']?>
 									<br><br>
 				              	<p>Catégorie(s) : </p>
-				              	<p><i><?php echo $donnees_article['categories']?></i></p>
+
+				              	
+				              	<p><i>
+				              		
+								<?php 
+          						$categories_selection = $pdo->prepare("
+          							SELECT categories_liste.categorie_nom 
+          							from categories_liste 
+          							INNER JOIN articles_has_categories 
+          							ON articles_has_categories.id_categories = categories_liste.categorie_id 
+          							AND articles_has_categories.id_articles= ? ");
+
+						          $categories_selection->execute(array($_GET['article']));
+						          $categories_selection = $categories_selection->fetchAll();
+						            foreach ($categories_selection as $key => $value) {
+						              echo $categories_selection[$key]['categorie_nom'].' ';
+						            };
+						          ?>  
+
+				              	</i></p>
 								
 								<label for="categories">Changer catégorie(s)</label>
 					        	<ul id="categories_liste_wrapper">
 					        		<?php foreach ($categories_liste as $i => $value) {
 					        		?>
 
-					        		<li><input type="checkbox" name="categories[]" value="<?php echo $categories_liste[$i]['categorie_nom'] ?>"><?php echo $categories_liste[$i]['categorie_nom'] ?></li>
+					        		<li><input type="checkbox" name="categories[]" value="<?php echo $categories_liste[$i]['categorie_id'] ?>"><?php echo $categories_liste[$i]['categorie_nom'] ?></li>
 
 					        		<?php } ?>
 						        </ul>
