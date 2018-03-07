@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 		header('Location: admin_create_categorie.php');
 	}
 }
-
+/* Récupération des catégories pour les afficher dans l'html */
 $liste_cat = $pdo->query('SELECT * FROM categories_liste ORDER BY categorie_nom');
 $liste_cat = $liste_cat->fetchAll();
 

@@ -1,8 +1,10 @@
 <?php
 @include 'connection_db.php';
 
+//Récupération du GET
 $cat_select= $_GET['categorie'];
 
+/* Récupération des articles au départ du tableau intermédiaire */
 $categorie_articles = $pdo->query("SELECT * from articles INNER JOIN articles_has_categories ON articles.Id=articles_has_categories.id_articles AND articles_has_categories.id_categories= $cat_select ");;
 
 $categorie_pour_titreH2 = $pdo->query("SELECT categorie_nom FROM categories_liste WHERE categorie_id = $cat_select ");
@@ -99,6 +101,8 @@ $categorie_articles = $categorie_articles->fetchAll(); //rends un tableau
 	  	</ul>
 	</nav>
 	<h2>Article concernant la catégorie "<?php echo $categorie_pour_titreH2[0] ?>"</h2>
+
+  <!--Affichage des articles au départ des tables de la DB -->
 	<?php for ($i=0; $i < sizeof($categorie_articles); $i++) {  
 		//conversion de la date au format européen
 		$sqldate = strtotime($categorie_articles[$i]["date_ajout"]); 

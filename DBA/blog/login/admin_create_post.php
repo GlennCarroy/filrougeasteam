@@ -10,6 +10,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 
 @include '../connection_db.php';
 
+
+/* Le code se déclenchera uniquement si le bouton Submit a été cliqué */
 if (isset($_POST['submit'])) {
 	if( isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['auteur']) AND isset($_POST['categories']) ) {
 		//Requête préparée pour envoyer dans la base de donées.
@@ -95,8 +97,6 @@ $categories_liste = $categories_liste->fetchAll();
 			</ul>
 		<input type="submit" value="Publier" name="submit" class="button">
 	</form>
-
-	<?php var_dump( $article_last_id ) ?>
 
   <!-- JavaScript Libraries -->
   <script src="../../lib/jquery/jquery.min.js"></script>
