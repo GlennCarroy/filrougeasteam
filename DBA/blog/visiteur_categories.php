@@ -1,11 +1,16 @@
 <?php
 @include 'connection_db.php';
 
+//Récupération du GET
 $cat_select= $_GET['categorie'];
 
-$categorie_articles = $pdo->query("SELECT * FROM articles WHERE categories = '$cat_select' ORDER BY date_ajout DESC ");
+/* Récupération des articles au départ du tableau intermédiaire */
+$categorie_articles = $pdo->query("SELECT * from articles INNER JOIN articles_has_categories ON articles.Id=articles_has_categories.id_articles AND articles_has_categories.id_categories= $cat_select ");;
 
-$categorie_articles = $categorie_articles->fetchAll(); //rends un tabl
+$categorie_pour_titreH2 = $pdo->query("SELECT categorie_nom FROM categories_liste WHERE categorie_id = $cat_select ");
+$categorie_pour_titreH2 = $categorie_pour_titreH2->fetch();
+
+$categorie_articles = $categorie_articles->fetchAll(); //rends un tableau
 
 ?>
 <!DOCTYPE html>
@@ -95,7 +100,9 @@ $categorie_articles = $categorie_articles->fetchAll(); //rends un tabl
 	  		<li><a href="visiteur_blog.php">Retour</a></li>
 	  	</ul>
 	</nav>
-	<h2>Article concernant la catégorie "<?php echo $cat_select ?>"</h2>
+	<h2>Article concernant la catégorie "<?php echo $categorie_pour_titreH2[0] ?>"</h2>
+
+  <!--Affichage des articles au départ des tables de la DB -->
 	<?php for ($i=0; $i < sizeof($categorie_articles); $i++) {  
 		//conversion de la date au format européen
 		$sqldate = strtotime($categorie_articles[$i]["date_ajout"]); 

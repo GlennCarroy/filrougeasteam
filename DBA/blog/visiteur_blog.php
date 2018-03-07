@@ -1,9 +1,13 @@
 <?php
 @include 'connection_db.php';
 
-$top_blog = $pdo->query("SELECT * FROM articles ORDER BY date_ajout DESC ");
+$top_blog = $pdo->query("SELECT * from articles ORDER BY articles.date_ajout DESC");
 
-$top_blog = $top_blog->fetchAll() //rends un tableau;
+$lien_vers_categories = $pdo->query("SELECT * FROM categories_liste ORDER BY categorie_nom ");
+
+/* Générer les tableaux de donées. */
+$top_blog = $top_blog->fetchAll();
+$lien_vers_categories = $lien_vers_categories->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +47,6 @@ $top_blog = $top_blog->fetchAll() //rends un tableau;
 </head>
 
 <body>
-
   <!--==========================
     Header
   ============================-->
@@ -91,20 +94,31 @@ $top_blog = $top_blog->fetchAll() //rends un tableau;
   	<h1>Blog de la DBA</h1>
   	<nav>
 	  	<ul>
-	  		<li><a href="visiteur_categories.php?categorie=Environnement">Environnement</a></li>
-	  		<li><a href="visiteur_categories.php?categorie=Projets">Projets</a></li>
-	  		<li><a href="visiteur_categories.php?categorie=Solidarité">Solidarité</a></li>
+        <!-- Affichage du menu via les catégories présentes dans la table "catégorie" de la DB -->
+        <?php 
+          foreach ($lien_vers_categories as $key => $value) { ?>
+            <li><a href="visiteur_categories.php?categorie=<?php echo $lien_vers_categories[$key]['categorie_id'] ?>"><?php echo $lien_vers_categories[$key]['categorie_nom'] ?></a></li>
+        <?php } ?>
 	  	</ul>
 	</nav>
   	<h2>Derniers articles en ligne</h2>
-	
+
 	 <?php for ($i=0; $i < 5; $i++) {  
 	 		//conversion de la date au format européen
 		$sqldate = strtotime($top_blog[$i]["date_ajout"]); 
 		$eurodate = date('d-m-Y H:i:s', $sqldate);
 	 	?>
 			<div class="articleWrapper">
-				<span class="categories_tags"><?php echo $top_blog[$i]["categories"] ?></span>
+				<span class="categories_tags">
+          <?php 
+          $categories_selection = $pdo->prepare("SELECT categories_liste.categorie_nom from categories_liste INNER JOIN articles_has_categories ON articles_has_categories.id_categories = categories_liste.categorie_id AND articles_has_categories.id_articles= ? ");
+          $categories_selection->execute(array($top_blog[$i][0]));
+          $categories_selection = $categories_selection->fetchAll();
+            foreach ($categories_selection as $key => $value) {
+              echo $categories_selection[$key]['categorie_nom'].' ';
+            };
+          ?>   
+        </span>
 				<h3><?php echo $top_blog[$i]["titre"]?></h3>
 					<p><?php echo $top_blog[$i]["contenu"] ?></p>
 					<ul>
