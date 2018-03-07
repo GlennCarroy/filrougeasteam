@@ -25,8 +25,6 @@ $reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, 
 		<meta content="" name="keywords">
 		<meta content="" name="description">
 
-
-
 		<!-- Favicons -->
 		<link href="../../img/favicon.png" rel="icon">
 		<link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -70,13 +68,17 @@ while($donnees_article = $reponse_article->fetch()){
 					    <h5 class="card-title"><?php echo $donnees_article['titre'] ?></h5>
 					    <h6 class="card-subtitle mb-2 text-muted"><?php echo $donnees_article['auteurs']?> le <?php echo $donnees_article['date_ajout_fr']?></h6>
 					    <ul class="modif-blog">
-		            		<li><a href="admin_update_post.php?article=<?php echo $donnees_article['Id']?>"><div class="icon-blog"><i class="ion-edit">Éditer</i></div></a></li>
-				            <li><a href="admin_delete_post.php"><div class="icon-blog"><i class="ion-close">Supprimer</i></div></a></li>
+		            		<li><a href="admin_update_post.php?article=<?php echo $donnees_article['Id']?>"><div class="icon-blog"><i class="ion-edit">Éditer</i></div></a>
+		            		</li>
+				            <li><a href="admin_delete_post.php?article=<?php echo $donnees_article['Id']?>" class="confirmation"><div class="icon-blog"><i class="ion-close">Supprimer</i></div></a>
+				            </li>
 				        </ul>
 					  </div>
 					</div>
 <?php
 }
+
+$reponse_article->closeCursor(); // Termine le traitement de la requête
 ?>
 				</div>
 				<br><br>	        	
@@ -134,6 +136,11 @@ while($donnees_article = $reponse_article->fetch()){
   <!-- Template Main Javascript File -->
   <script src="../../js/main.js"></script>
 
+	<script type="text/javascript">
+	    $('.confirmation').on('click', function () {
+	        return confirm('Êtes-vous sûr de supprimer l\'article ?');
+	    });
+	</script>
 
 </body>
 </html>

@@ -10,18 +10,20 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   exit;
 }
 
+// On convertit le GET en_integer
+$_GET['article'] = (int) $_GET['article'];
 
 
 $categories_liste = $pdo->query("SELECT * FROM categories_liste");
 $categories_liste = $categories_liste->fetchAll();
 
-if(isset($_POST['titre']) || isset($_POST['contenu']) || isset($_POST['categories']) || isset($_POST['auteur']) AND isset($_GET['article'])){
+if(isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['categories']) AND isset($_POST['auteur']) AND isset($_GET['article'])){
 
-	foreach ($_POST['categories'] as $key => $value) {
+	// foreach ($_POST['categories'] as $key => $value) {
 		
 	$nvtitre = htmlspecialchars($_POST['titre']);
 	$nvcontenu = htmlspecialchars($_POST['contenu']);
-	$nvcategories = $_POST['categories'][$key];
+	$nvcategories = implode("," , $_POST['categories'] /*[$key]*/ );
 	$nvauteurs = htmlspecialchars($_POST['auteur']);
 
 	var_dump($nvcategories);
@@ -41,14 +43,13 @@ if(isset($_POST['titre']) || isset($_POST['contenu']) || isset($_POST['categorie
 	    'Id' => $_GET['article']
 
 	    ));
-	}
+	// }
 }
 
-//Je mets ce code après pour que 
+//Je mets ce code après pour que les modifs s'affichent quand on édite
 //On va chercher la bdd en fonction de l'id
 $reponse_article = $pdo->prepare("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles WHERE Id = ?");
-// On convertit le GET en_integer
-$_GET['article'] = (int) $_GET['article'];
+
 //l'id se trouve dans le GET
 $reponse_article->execute(array($_GET['article']));
 
