@@ -11,17 +11,25 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 @include '../connection_db.php';
 
 if (isset($_POST['submit'])) {
-	if( isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['auteur']) ) {
+	if( isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['auteur']) AND isset($_POST['categories']) ) {
 		//Requête préparée pour envoyer dans la base de donées.
-		$add_post = $pdo->prepare('INSERT INTO articles( titre , contenu , auteurs , categories , date_ajout ) VALUES (? , ? , ? , ? , ? ) ');
+		$add_post = $pdo->prepare('INSERT INTO articles( titre , contenu , auteurs , date_ajout ) VALUES (? , ? , ? , ? ) ');
 		/* On sanitize les entrées */
 		$titre = htmlspecialchars($_POST['titre']);
 		$contenu = htmlspecialchars($_POST['contenu']);
 		$auteur = $titre = htmlspecialchars($_POST['auteur']);
-		$categories = implode("," , $_POST['categories']);
 		$date = date("Y-m-d H:i:s");
+		$add_post->execute(array( $titre , $contenu , $auteur , $date));
 
-		$add_post->execute(array( $titre , $contenu , $auteur , $categories , $date));
+		/* Insertion des ID dans la table intermédiaire 'articles_has_categories' */
+		$article_last_id = $pdo->query("SELECT LAST_INSERT_ID() FROM articles");
+		$article_last_id = $article_last_id->fetch();
+		$categories = $_POST['categories'];
+
+		foreach ($categories as $key => $value) {
+			$add_ids_in_midtable = $pdo->prepare("INSERT INTO articles_has_categories ( id_articles , id_categories ) VALUES ( ? , ? ) ");
+			$add_ids_in_midtable->execute( array( $article_last_id[0] , $categories[$key] ) );
+		}
 				
 		echo '<body onLoad="alert(\'Votre nouvel article est en ligne.\')">';
 	}
@@ -77,14 +85,18 @@ $categories_liste = $categories_liste->fetchAll();
 			<input type="text" name="auteur" maxlength="50" required>
 		<label for="categories">Catégorie(s)</label>
 			<ul id="categories_liste_wrapper">
+
+				<!-- Génération de la liste de catégorie au départ de la table "catégorie" de la DB -->
 				<?php for ($i=0; $i < sizeof($categories_liste) ; $i++) { ?>
 
-					<li><input type="checkbox" name="categories[]" value="<?php echo $categories_liste[$i]['categorie_nom'] ?>"><?php echo $categories_liste[$i]['categorie_nom'] ?></li>
+					<li><input type="checkbox" name="categories[]" value="<?php echo $categories_liste[$i]['categorie_id'] ?>"><?php echo $categories_liste[$i]['categorie_nom'] ?></li>
 
 				<?php } ?>
 			</ul>
 		<input type="submit" value="Publier" name="submit" class="button">
 	</form>
+
+	<?php var_dump( $article_last_id ) ?>
 
   <!-- JavaScript Libraries -->
   <script src="../../lib/jquery/jquery.min.js"></script>

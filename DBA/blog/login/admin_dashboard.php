@@ -11,9 +11,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 }
 
 
-$reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
+$reponse_article = $pdo->query("SELECT Id, titre, contenu, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
 
-$reponse_article2 = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
+$reponse_article2 = $pdo->query("SELECT Id, titre, contenu, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY Id");
 
 ?>
 
