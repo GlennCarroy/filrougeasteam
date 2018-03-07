@@ -19,43 +19,36 @@ if(isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['categor
 	$nvcontenu = htmlspecialchars($_POST['contenu']);
 	$nvauteurs = htmlspecialchars($_POST['auteur']);
 
-	//Requête pour modifier les champs dans 'articles'
-	$req = $pdo->prepare("UPDATE articles SET 
+	//Requête pour modifier les champs dans 'articles' En fonction de l'Id
+	$update_table_articles = $pdo->prepare("UPDATE articles SET 
 		titre = :nvtitre, 
 		contenu = :nvcontenu, 
 		auteurs = :nvauteurs 
 		WHERE Id = :Id");
 
-	$req->execute(array(
+	$update_table_articles->execute(array(
 	    'nvtitre' => $nvtitre,
 	    'nvcontenu' => $nvcontenu,
 	    'nvauteurs' => $nvauteurs,
 	    'Id' => $_GET['article']
 	    ));
 	
-	//On met à jour 'articles_has_categories' avec les catégories sélectionnées en fonction de l'id de l'article
+
+	//Delete table articles_has_categories En fonction de l'id_articles
+	$delete_id_articles = $pdo->prepare("DELETE FROM articles_has_categories WHERE id_articles = ?");
+	$delete_id_articles->execute(array($_GET['article']));
+
+	//On insert les catégories sélectionnées dans 'articles_has_categories' en fonction de l'id_articles
 	$nvcategories = $_POST['categories'];
+
+	var_dump($nvcategories);
 
 	foreach ($nvcategories as $key => $value) {
 
-		var_dump($nvcategories[$key]);
+		$insert_checkbox_categories = $pdo->prepare("INSERT INTO articles_has_categories(id_articles, id_categories) VALUES (? , ? )");
 
-		// $nvcategories = $nvcategories[$value];
-
-		if ($) {
-			# code...
-		}
-
-		$update2 = $pdo->query("SELECT id FROM articles_has_categories");
-
-		$update_categories = $pdo->prepare("UPDATE articles_has_categories SET 
-		id_categories = :nvcategorie
-		WHERE id_articles = :id_articles");
-
-		$update_categories->execute(array(
-		'nvcategorie' => $nvcategories[$key],
-		'id_articles' => $_GET['article']
-		));
+		$insert_checkbox_categories->execute(array( $_GET['article'], $nvcategories[$key] ));
+		
 	}
 }
 
@@ -148,7 +141,7 @@ while($donnees_article = $reponse_article->fetch()){
 
 				              	</i></p>
 								
-								<label for="categories">Changer catégorie(s)</label>
+								<label for="categories">Changer de catégorie(s)</label>
 					        	<ul id="categories_liste_wrapper">
 					        		<?php foreach ($categories_liste as $i => $value) {
 					        		?>
