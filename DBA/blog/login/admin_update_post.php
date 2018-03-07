@@ -13,38 +13,43 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 // On convertit le GET en_integer
 $_GET['article'] = (int) $_GET['article'];
 
-
-$categories_liste = $pdo->query("SELECT * FROM categories_liste");
-$categories_liste = $categories_liste->fetchAll();
-
 if(isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['categories']) AND isset($_POST['auteur']) AND isset($_GET['article'])){
 
-	// foreach ($_POST['categories'] as $key => $value) {
-		
 	$nvtitre = htmlspecialchars($_POST['titre']);
 	$nvcontenu = htmlspecialchars($_POST['contenu']);
-	$nvcategories = implode("," , $_POST['categories'] /*[$key]*/ );
 	$nvauteurs = htmlspecialchars($_POST['auteur']);
 
-	var_dump($nvcategories);
-
+	//Requête pour modifier les champs dans 'articles'
 	$req = $pdo->prepare("UPDATE articles SET 
 		titre = :nvtitre, 
 		contenu = :nvcontenu, 
-		categories = :nvcategories, 
 		auteurs = :nvauteurs 
 		WHERE Id = :Id");
 
 	$req->execute(array(
 	    'nvtitre' => $nvtitre,
 	    'nvcontenu' => $nvcontenu,
-	    'nvcategories' => $nvcategories,
 	    'nvauteurs' => $nvauteurs,
 	    'Id' => $_GET['article']
-
 	    ));
-	// }
+	
+	//On met à jour 'articles_has_categories' avec les catégories sélectionnées en fonction de l'id de l'article
+	$nvcategories = $_POST['categories'];
+	foreach ($nvcategories as $key => $value) {
+		$update_categories = $pdo->prepare("UPDATE articles_has_categories SET 
+		id_categories = :nvcategorie
+		WHERE id_articles = :id_articles");
+
+		$update_categories->execute(array(
+		'nvcategorie' => $nvcategories['$key'],
+		'id_articles' => $_GET['article']
+		))
+	}
 }
+
+//On appelle le tableau categories_list pour les diposer avec des checkbox
+$categories_liste = $pdo->query("SELECT * FROM categories_liste");
+$categories_liste = $categories_liste->fetchAll();
 
 //Je mets ce code après pour que les modifs s'affichent quand on édite
 //On va chercher la bdd en fonction de l'id
@@ -84,7 +89,7 @@ $reponse_article->execute(array($_GET['article']));
 </head>
 	<body>
 <?php 
-		include('admin_blog_header.php');
+		// include('admin_blog_header.php');
 ?>
 		<div class="container marg-top">
 			<div class="row">

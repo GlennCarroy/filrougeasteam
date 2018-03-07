@@ -10,7 +10,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   exit;
 }
 
-
+//Va chercher la table articles
 $reponse_article = $pdo->query("SELECT Id, titre, contenu, categories, auteurs, DATE_FORMAT(date_ajout, '%d/%m/%Y à %Hh%i') AS date_ajout_fr FROM articles ORDER BY date_ajout DESC");
 
 ?>
