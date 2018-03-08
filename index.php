@@ -1,0 +1,1 @@
+<? php header('Location: DBA/index.php') ?>
