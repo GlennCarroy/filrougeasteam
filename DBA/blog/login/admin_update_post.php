@@ -41,12 +41,9 @@ if(isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['categor
 	//On insert les catégories sélectionnées dans 'articles_has_categories' en fonction de l'id_articles
 	$nvcategories = $_POST['categories'];
 
-	var_dump($nvcategories);
-
 	foreach ($nvcategories as $key => $value) {
 
 		$insert_checkbox_categories = $pdo->prepare("INSERT INTO articles_has_categories(id_articles, id_categories) VALUES (? , ? )");
-
 		$insert_checkbox_categories->execute(array( $_GET['article'], $nvcategories[$key] ));
 		
 	}
@@ -55,9 +52,6 @@ if(isset($_POST['titre']) AND isset($_POST['contenu']) AND isset($_POST['categor
 //On appelle le tableau categories_list pour les diposer avec des checkbox
 $categories_liste = $pdo->query("SELECT * FROM categories_liste");
 $categories_liste = $categories_liste->fetchAll();
-
-$caca = $pdo->query("SELECT * FROM articles_has_categories");
-$caca = $caca->fetchAll();
 
 //Je mets ce code après pour que les modifs s'affichent quand on édite
 //On va chercher la bdd en fonction de l'id
