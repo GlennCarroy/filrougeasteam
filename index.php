@@ -1,1 +1,1 @@
-<? php header('Location: DBA/index.php') ?>
+<?php header('Location: DBA/index.php') ?>
