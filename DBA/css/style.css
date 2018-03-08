@@ -275,7 +275,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Nav Meu Container */
 #nav-menu-container {
-  float: right;
+  position: fixed !important;
+  right: 0 !important;
   margin-top: 20px;
 }
 
@@ -292,8 +293,8 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   color: #fff;
   font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: 900;
+  font-size: 10px;
   outline: none;
 }
 
@@ -1055,7 +1056,6 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #1dc8cd;
 }
 
-<<<<<<< HEAD
 /* BLOG PAGE CORRECTION */
 
 .blog_html {
@@ -1098,3 +1098,4 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #eff5f5;
   font-size: 0.8rem;
   padding: 5px;
+

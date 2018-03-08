@@ -78,7 +78,10 @@ $categories_liste = $categories_liste->fetchAll();
 
 	<?php include 'admin_blog_header.php' ?>
 
+
+
 	<form method="POST" class="create_main create_post" >
+		 <h2>Créer un article</h2>
 		<label for="titre">Titre</label>
 			<input type="text" name="titre" maxlength="70" required>
 		<label for="contenu">Contenu</label>
@@ -98,20 +101,6 @@ $categories_liste = $categories_liste->fetchAll();
 		<input type="submit" value="Publier" name="submit" class="button">
 	</form>
 
-  <!-- JavaScript Libraries -->
-  <script src="../../lib/jquery/jquery.min.js"></script>
-  <script src="../../lib/jquery/jquery-migrate.min.js"></script>
-  <script src="../../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../lib/easing/easing.min.js"></script>
-  <script src="../../lib/wow/wow.min.js"></script>
-  <script src="../../lib/superfish/hoverIntent.js"></script>
-  <script src="../../lib/superfish/superfish.min.js"></script>
-  <script src="../../lib/magnific-popup/magnific-popup.min.js"></script>
-
-  <!-- Contact Form JavaScript File -->
-  <script src="../../contactform/contactform.js"></script>
-
-  <!-- Template Main Javascript File -->
-  <script src="../../js/main.js"></script>
+<?php include('admin_blog_footer.php') ?>
 </body>
 </html>

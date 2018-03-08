@@ -9,6 +9,7 @@
 
 	      <nav id="nav-menu-container">
 	        <ul class="nav-menu">
+	        	<li><a href="../visiteur_blog.php">Blog visiteur</a></li>
 	          <li class="menu-active"><a href="admin_dashboard.php">Dashboard</a></li>
 	          <li><a href="admin_create_post.php">Créer un post</a></li>
 	          <li><a href="admin_create_categorie.php">Ajouter une catégorie</a></li>

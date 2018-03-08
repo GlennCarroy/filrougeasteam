@@ -156,5 +156,7 @@ while($donnees_article = $reponse_article->fetch()){
 			</div>
   		</div>
 
+<?php include('admin_blog_footer.php') ?>
+
 </body>
 </html>

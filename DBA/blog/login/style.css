@@ -1056,6 +1056,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 
+
 /*-----------------------------------------------------
 # DASHBOARD
 --------------------------------------------------------*/
@@ -1169,8 +1170,19 @@ h3.section-title{
   width: 20%;
 }
 
+.categories_tags {
+  background-color: #666a6e !important; 
+  color: #eff5f5;
+  font-size: 0.8rem;
+  padding: 5px;
+}
 
 .marg-top{
   margin-top: 6rem !important;
+}
+
+
+.cadre h2{
+  border: 2px solid #55fabe;
 }
 

@@ -65,7 +65,7 @@ $reponse_article = $pdo->query("SELECT Id, titre, contenu, auteurs, DATE_FORMAT(
 while($donnees_article = $reponse_article->fetch()){
 ?>
 
-		        <div class="card col-lg-3 m-1">
+		        <div class="card col-lg-3 col-md-3 m-1">
 					  <div class="card-body">
 					    <h5 class="card-title"><?php echo $donnees_article['titre'] ?></h5>
 					    <h6 class="card-subtitle mb-2 text-muted"><?php echo $donnees_article['auteurs']?> le <?php echo $donnees_article['date_ajout_fr']?></h6>
@@ -76,7 +76,7 @@ while($donnees_article = $reponse_article->fetch()){
 				            </li>
 				        </ul>
 					  </div>
-					</div>
+				</div>
 <?php
 }
 
@@ -91,58 +91,7 @@ $reponse_article->closeCursor(); // Termine le traitement de la requête
   <!--==========================
     Footer
   ============================-->
-  <footer id="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 text-lg-left text-center">
-          <div class="copyright">
-            &copy; Copyright <strong>Avilon</strong>. All Rights Reserved
-          </div>
-          <div class="credits">
-            <!--
-              All the links in the footer should remain intact.
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Avilon
-            -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-            <a href="#intro" class="scrollto">Home</a>
-            <a href="#about" class="scrollto">A propos</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </footer><!-- #footer -->
-
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
-  <!-- JavaScript Libraries -->
-  <script src="../../lib/jquery/jquery.min.js"></script>
-  <script src="../../lib/jquery/jquery-migrate.min.js"></script>
-  <script src="../../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../lib/easing/easing.min.js"></script>
-  <script src="../../lib/wow/wow.min.js"></script>
-  <script src="../../lib/superfish/hoverIntent.js"></script>
-  <script src="../../lib/superfish/superfish.min.js"></script>
-  <script src="../../lib/magnific-popup/magnific-popup.min.js"></script>
-
-  <!-- Contact Form JavaScript File -->
-  <script src="../../contactform/contactform.js"></script>
-
-  <!-- Template Main Javascript File -->
-  <script src="../../js/main.js"></script>
-
-	<script type="text/javascript">
-	    $('.confirmation').on('click', function () {
-	        return confirm('Êtes-vous sûr de supprimer l\'article ?');
-	    });
-	</script>
+<?php include('admin_blog_footer.php') ?>
 
 </body>
 </html>

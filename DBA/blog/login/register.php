@@ -128,6 +128,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <p>Vous avez déjà un compte? <a href="login.php">Connectez-vous ici</a>.</p>
         </form>
-    </div>    
+    </div> 
+  
 </body>
 </html>
