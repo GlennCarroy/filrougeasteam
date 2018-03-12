@@ -61,7 +61,7 @@ $lien_vers_categories = $lien_vers_categories->fetchAll();
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="../index.html">Accueil</a></li>
+          <li class="menu-active"><a href="../index.php">Accueil</a></li>
            <li><a href="visiteur_blog.php">Blog</a></li>
            <li><a href="login/login.php">Login Admin</a></li>
         </ul>
