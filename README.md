@@ -10,11 +10,9 @@ Réalisation de la partie blog du one page créé lors du Guerilla Style en mode
 	- Nicolas Jamar
 	
 Site de départ : [ONG Défi Belgique Afrique](https://www.ongdba.org/)
-
 A partir de Guerilla Style : [https://mascla.github.io/DBA/](https://mascla.github.io/DBA/)
 
-Lien BLOG: 
+[Lien BLOG](https://marinesclavons.000webhostapp.com/DBA/blog/visiteur_blog.php)
 
-Lien ADMIN :
+[Lien ADMIN](https://marinesclavons.000webhostapp.com/DBA/blog/login/login.php)
 
-Lien Heroku final : 
